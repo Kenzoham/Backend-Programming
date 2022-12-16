@@ -46,3 +46,4 @@ Route::put('/students/{id}', [StudentController::class, 'update']);
 // Menghapus resource student
 // method delete
 Route::delete('/students/{id}', [StudentController::class, 'destroy']);
+
