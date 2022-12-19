@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Student;
+use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    # method index - get all resources
+    # methode get all resources
     public function index()
     {
-        # menggunakan model Student untuk select data
+        # Menggunakan model Student
         $students = Student::all();
 
         $data = [
@@ -19,105 +19,117 @@ class StudentController extends Controller
         ];
 
         # menggunakan response json laravel
-        # otomatis set header content type json
-        # otomatis mengubah data array ke JSON
-        # mengatur status code
+        # otomatis mengatur header Content-Type ke json
+        # otomatis mengubah array ke JSON
+        # dapat mengatur status code
         return response()->json($data, 200);
     }
 
-    # menambahkan resource student
-    # membuat method store
-    public function store(Request $request)
-    {
-        $student = New Student();
-
-        # menangkap data request
-        $student->nama = $request->input('nama');
-        $student->nim = $request->input('nim');
-        $student->email = $request->input('email');
-        $student->jurusan = $request->input('jurusan');
-
-        # menggunakan Student untuk insert data
-        $student->save();
-
-        $data = [
-            'message' => 'Student is created successfully',
-            'data' => $student,
-        ];
-
-        # mengembalikan data (json) status code 200
-        return response()->json($data, 200);
-    }    
-
-        
-    // mendapatkan detail resource student
-    // membuat method show
-    public function show($id)
-    {
-        // mencari data student
+    // Mendapatkan detail resources student
+    // Membuat mehthode show
+    public function show($id){
+        // Mencari data student
         $student = Student::find($id);
 
-        if($student)
+        if ($student) 
         {
             $data = [
-                'messege'=>'Get Detail Student',
-                'data'=>$student,
-            ];
-    
-            // mengambil data json status code 200
-            return response()->json($data,200);
-        }else{
-            $data = [
-                'message' => 'student not found',
+                'messege'=>'Get detail student',
+                'data'=>$student
             ];
 
-            // mengembalikan data json
-            return response()->json($data,404);
+            // mengembalikan data json status code 200
+            return response()->json($data, 200);
+        } else {
+            $data = [
+                'message' => 'Student not Found'
+            ];
+
+            // Mengembalikan data json status code 404
+            return response()->json($data, 404);
         }
     }
 
-    // mengupdate resouce student
-    // membuat method update
-    public function update(Request $request, $id)
-    {
-        // cari data student yg ingin di update
-        $student = Student::find($id);
+    # Menambahkan resources
+    # Membuat methode store
+    public function store(Request $request){
+    # Menangkap data request
+    $input = [
+        'nama' => $request->nama,
+        'nim' => $request->nim,
+        'email' => $request->email,
+        'jurusan' => $request->jurusan,
+    ];
 
-        // mendapatkan data request
-        $input = [
-            'nama' => $request->nama,
-            'nim' => $request->nim,
-            'email' => $request->email,
-            'jurusan' => $request->jurusan,
-        ];
-        $student->update($input);
+    #menggunakan student untuk insert data
+    $student = Student::create($input);
     
-        $data = [
-            'message' => 'Resource student update',
-            'data' => $student,
-        ];
-        // mengirimkan respon json dengan status code 200
-        return response()->json($data,200);
+    $data = [
+        'message' => 'Student is created successfully',
+        'data' => $student,
+    ];
+
+    # mengembalikan data (json) status code 201
+    return response()->json($data, 201);
     }
 
-
-    public function destroy($id)
+    // Mengupdate data student
+    public function update(Request $request, $id)
     {
+        // mencari data student yg ingin diupdate
         $student = Student::find($id);
 
-        if($student){
-            $student->delete();
-        $data = [
-            'message'=>'Student is deleted',
-        ];
-
-        // mengembalikan data json status code 200
-        return response()->json($data,200);
-        }else{
-            $data = [
-                'message'=>'Student not found',
+        if ($student) {
+            // mendapatkan data request
+            $input = [
+                'nama' => $request->nama ?? $student->nama,
+                'nim' => $request->nim ?? $student->nim,
+                'email' => $request->email ?? $student->email,
+                'jurusan' => $request->jurusan ?? $student->jurusan,
             ];
-            return response()->json($data,404);
+
+            // mengupdate data
+            $student->update($input);
+
+            $data = [
+                'message' => 'Resource student updated',
+                'data' => $student,
+            ];
+            // mengirimkan respon json dgn status code 200
+            return response()->json($data, 200);
+        } else {
+            $data = [
+                'message' => 'Student not found',
+            ];
+
+            // mengembalikan data json status code 404
+            return response()->json($data, 404);
+        }
+    }
+
+    // controller untuk menghapus data student
+    public function destroy($id)
+    {
+        # cari data student yg ingin dihapus
+        $student = Student::find($id);
+
+        if ($student) {
+            # hapus data student
+            $student->delete();
+
+            $data = [
+                'message' => 'Student is deleted',
+            ];
+
+            # mengembalikan data json status code 200
+            return response()->json($data, 200);
+        } else {
+            $data = [
+                'message' => 'Student not found',
+            ];
+
+            # mengembalikan data json status code 404
+            return response()->json($data, 404);
         }
     }
 }
