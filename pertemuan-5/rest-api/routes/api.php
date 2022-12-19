@@ -35,10 +35,6 @@ Route::get('/students', [StudentController::class, 'index']);
 // Menambahkan resources students
 Route::post('/students', [StudentController::class, 'store']);
 
-// mendapatkan detail resource student
-// method get
-Route::get('/students/{id}', [StudentController::class, 'show']);
-
 // Menfupdate resource student
 // method put
 Route::put('/students/{id}', [StudentController::class, 'update']);
