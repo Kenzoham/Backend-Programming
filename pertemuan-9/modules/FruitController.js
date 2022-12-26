@@ -1,4 +1,4 @@
-// import data fruits
+// Mengimport data fruits
 const fruits = require("./data.js");
 
 // membuat fungsi index

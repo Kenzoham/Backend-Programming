@@ -1,10 +1,15 @@
+
+/**
+ * membuat variable user dengan const,
+ * membuat objek menggunakn {}
+ */
+
 const user = {
-  name: "Ilham",
-  age: 19,
-  address: "Bogor, Jawa Barat",
-  isMarried:false,
+    name: "Abdullah Ilham",
+    kelas: "TI06",
+    age: 19
 };
 
 console.log(user.name);
-console.log(user.address);
-console.log(user["age"]);
+console.log(user.age);
+console.log(user["kelas"]);

@@ -4,7 +4,7 @@ const main = () => {
     console.log(`Method index - Menampilkan Buah`);
     index();
     console.log("");
-    store("Durian");
+    store("Pisang");
     console.log("");
     update(0, "Kelapa");
     console.log("");

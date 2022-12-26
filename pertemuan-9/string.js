@@ -1,5 +1,5 @@
-const name = "Ilham";
+const name = "Abdullah Ilham";
 const age = 19;
 
-console.log("Nama Saya: " + name + " Umur: " + age);
-console.log(`Nama Saya: ${name} Umur ${age}`);
+console.log("nama saya: " + name + " umur: " + age);
+console.log(`Nama Saya: ${name} Umur: ${age}`);

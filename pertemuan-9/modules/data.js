@@ -1,4 +1,5 @@
-const fruits = ["Apple", "Banana", "Orange"];
+// membuat array yang berisi data buah
+const fruits = ["Banana", "Mango", "Durian"];
 
-// export data fruits ke object exports
+// export fruit ke objett module.export
 module.exports = fruits;
